@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
+import { ContextProvider } from "./context/ContextProvider";
 
 const poppins = Poppins({
   weight: ["400", "500", "700", "900"],
@@ -26,8 +27,10 @@ export default function RootLayout({
       <body
         className={cn("bg-primary antialiased font-sans", poppins.variable)}
       >
-        <Header />
-        {children}
+        <ContextProvider>
+          <Header />
+          {children}
+        </ContextProvider>
       </body>
     </html>
   );
