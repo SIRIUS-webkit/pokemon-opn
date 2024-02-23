@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { useThemeContext } from "@/app/context/ContextProvider";
 import CartItems from "./CartItems";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 const Cart: FC = () => {
   const { cartItems, setCartItems } = useThemeContext();
@@ -42,7 +42,7 @@ const Cart: FC = () => {
             <button
               onClick={resetCart}
               type="button"
-              className="text-lightwhite underline p3"
+              className="text-lightwhite underline p3 outline-none"
             >
               Clear all
             </button>

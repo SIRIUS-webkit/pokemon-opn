@@ -1,9 +1,9 @@
 import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Image from "next/image";
 import { useThemeContext } from "@/app/context/ContextProvider";
 import { cn } from "@/lib/utils";
-import EmptyList from "./EmptyList";
+import EmptyList from "../EmptyList";
 import { useToast } from "@/components/ui/use-toast";
 
 interface Pokemon {

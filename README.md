@@ -45,3 +45,11 @@ To check the testing file, run this code
 ```bash
 npm test
 ```
+
+Desktop View
+
+![Website Preview](./public/ui.png)
+
+Mobile View
+
+![Website Preview](./public/mobile-ui.png)

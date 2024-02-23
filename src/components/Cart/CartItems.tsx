@@ -1,8 +1,8 @@
 import { useThemeContext } from "@/app/context/ContextProvider";
 import Image from "next/image";
 import React, { FC } from "react";
-import { Button } from "./ui/button";
-import { ScrollArea } from "./ui/scroll-area";
+import { Button } from "../ui/button";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface Pokemon {
   id: string;
