@@ -5,12 +5,14 @@ interface PaginationProps {
   setCurrentPage: Dispatch<SetStateAction<number>>;
   itemsPerPage: number;
   lists: [];
+  currentPage: number;
 }
 
 const Pagination: FC<PaginationProps> = ({
   setCurrentPage,
   itemsPerPage,
   lists,
+  currentPage,
 }) => {
   function handlePageClick({ selected }: { selected: number }) {
     setCurrentPage(selected);
@@ -20,6 +22,7 @@ const Pagination: FC<PaginationProps> = ({
     <ReactPaginate
       breakLabel="..."
       nextLabel=">"
+      forcePage={currentPage}
       onPageChange={handlePageClick}
       pageRangeDisplayed={5}
       pageCount={Math.ceil(lists.length / itemsPerPage)}

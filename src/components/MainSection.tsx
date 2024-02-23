@@ -86,6 +86,9 @@ const MainSection: React.FC<MainSectionProps> = ({
 
   // filter the list from drop down value
   function filterList(value: string, category: string) {
+    // reset current page
+    setCurrentPage(0);
+
     // Update filterConfig with the selected category and value
     setFilterConfig((prevFilterConfig) => ({
       ...prevFilterConfig,
@@ -181,6 +184,7 @@ const MainSection: React.FC<MainSectionProps> = ({
             lists={filterPokemonLists as []}
             itemsPerPage={itemsPerPage}
             setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
           />
         </div>
       </div>
