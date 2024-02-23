@@ -74,7 +74,7 @@ const CartItems: FC = () => {
   }
 
   return (
-    <ScrollArea className="h-[450px] w-[350px]">
+    <ScrollArea className="h-[450px] w-full">
       {cartItems.map((pokemon) => (
         <div key={pokemon.id}>
           <div className="grid grid-cols-12 text-white py-5">

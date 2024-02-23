@@ -1,7 +1,10 @@
-import React, { FC } from "react";
+import React from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { useThemeContext } from "@/app/context/ContextProvider";
+import { cn } from "@/lib/utils";
+import EmptyList from "./EmptyList";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Pokemon {
   id: string;
@@ -28,8 +31,16 @@ interface Pokemon {
 
 const PokemonLists = ({ pageData }: { pageData: any }) => {
   const { cartItems, setCartItems } = useThemeContext();
+  const { toast } = useToast();
 
   function addItem(data: Pokemon) {
+    // show notification
+    toast({
+      title: "Item was added to the cart.",
+      description:
+        "If there is an existing item, the quantity will be increased.",
+    });
+
     // check existing product
     const ProductExitst = cartItems.find((item) => item.id === data.id);
 
@@ -50,10 +61,17 @@ const PokemonLists = ({ pageData }: { pageData: any }) => {
     }
   }
 
+  if (pageData.length === 0) {
+    return <EmptyList />;
+  }
+
   return (
-    <div className="grid grid-cols-12 gap-8 items-stretch mb-8">
+    <div className="grid grid-cols-12 gap-y-9 gap-x-0 sm:gap-8 mb-8">
       {pageData.map((pokemon: any) => (
-        <div key={pokemon.id} className="col-span-2 relative h-[300px]">
+        <div
+          key={pokemon.id}
+          className="col-span-12 lg:col-span-2 md:col-span-4 sm:col-span-6 relative h-[300px]"
+        >
           <Image
             src={pokemon.images.small}
             alt={pokemon.name}
@@ -62,8 +80,8 @@ const PokemonLists = ({ pageData }: { pageData: any }) => {
             className="absolute bottom-[80px] z-10 left-1/2 right-1/2 -translate-x-1/2 -translate-y-1/2"
           />
 
-          <div className="bg-secondary text-white px-5 pb-5 pt-14 rounded-[20px] relative mt-[120px]">
-            <p className="p3 text-center">{pokemon.name}</p>
+          <div className="bg-secondary text-white px-5 pb-5 pt-14 rounded-[20px] relative mt-[110px]">
+            <p className="p3 text-center h-9">{pokemon.name}</p>
             <div className="flex space-x-2 justify-center items-center mt-8">
               <p className="text-lightwhite p3 text-center">
                 $ {pokemon.cardmarket?.prices?.averageSellPrice}
@@ -73,7 +91,16 @@ const PokemonLists = ({ pageData }: { pageData: any }) => {
                 {pokemon.set?.total} Cards
               </p>
             </div>
-            <Button className="w-full mt-2" onClick={() => addItem(pokemon)}>
+
+            <Button
+              className={cn(
+                pokemon.set?.total === 0 && "bg-[#312f3c]",
+                "w-full mt-2"
+              )}
+              disabled={pokemon.set?.total === 0}
+              onClick={() => addItem(pokemon)}
+            >
+              <img src="/shopping-bag.png" alt="bag" className="w-4 h-4 mr-2" />
               Add to cart
             </Button>
           </div>

@@ -7,7 +7,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -27,7 +26,7 @@ const SelectDrop: FC<DropProps> = ({
 }) => {
   return (
     <Select onValueChange={(value) => handleChange(value, category)}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-full md:w-[180px]">
         <SelectValue placeholder={label} />
       </SelectTrigger>
       <SelectContent>

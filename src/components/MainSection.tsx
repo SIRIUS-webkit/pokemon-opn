@@ -5,6 +5,7 @@ import { useThemeContext } from "@/app/context/ContextProvider";
 import SelectDrop from "./SelectDrop";
 import Pagination from "./Pagination";
 import PokemonLists from "./PokemonLists";
+import SkeletonLoading from "./SkeletonLoading";
 
 interface Pokemon {
   id: string;
@@ -51,8 +52,13 @@ const MainSection: React.FC<MainSectionProps> = ({
     setFilterPokemonLists,
   } = useThemeContext();
 
+  const [loading, setLoading] = useState<boolean>(true);
+
+  // update filter pokemon list from api data
   useEffect(() => {
+    setLoading(true);
     setFilterPokemonLists(lists);
+    setLoading(false);
   }, []);
 
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -64,10 +70,12 @@ const MainSection: React.FC<MainSectionProps> = ({
     offset + itemsPerPage
   );
 
+  // update pokemon list from api data
   useEffect(() => {
     setPokemonLists(lists);
   }, [lists]);
 
+  // rechange drop format from each api data
   function dropFormat(lists: []) {
     const reformatDrop = lists.map((item) => ({
       id: item,
@@ -76,6 +84,7 @@ const MainSection: React.FC<MainSectionProps> = ({
     return reformatDrop;
   }
 
+  // filter the list from drop down value
   function filterList(value: string, category: string) {
     // Update filterConfig with the selected category and value
     setFilterConfig((prevFilterConfig) => ({
@@ -138,9 +147,9 @@ const MainSection: React.FC<MainSectionProps> = ({
 
   return (
     <div>
-      <div className="max-w-[1200px] mx-auto flex justify-between items-center mt-5">
-        <h5 className="text-white">Choose Card</h5>
-        <div className="flex space-x-5">
+      <div className="max-w-[1200px] mx-4 lg:mx-auto flex flex-col md:flex-row justify-between md:items-center mt-5">
+        <h5 className="text-white mb-3">Choose Card</h5>
+        <div className="flex md:flex-row flex-col md:space-x-5 space-x-0 space-y-4 md:space-y-0">
           <SelectDrop
             lists={pokemonSets.slice(0, 8) as []}
             label="Set"
@@ -161,8 +170,12 @@ const MainSection: React.FC<MainSectionProps> = ({
           />
         </div>
       </div>
-      <div className="max-w-[1200px] mx-auto mt-5">
-        <PokemonLists pageData={currentPageData} />
+      <div className="max-w-[1200px] mx-4 md:mx-auto mt-5">
+        {loading ? (
+          <SkeletonLoading />
+        ) : (
+          <PokemonLists pageData={currentPageData} />
+        )}
         <div className="mt-24 mb-10">
           <Pagination
             lists={filterPokemonLists as []}

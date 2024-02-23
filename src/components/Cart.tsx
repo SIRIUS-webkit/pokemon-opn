@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { useThemeContext } from "@/app/context/ContextProvider";
 import CartItems from "./CartItems";
+import { Button } from "./ui/button";
 
 const Cart: FC = () => {
   const { cartItems, setCartItems } = useThemeContext();
@@ -30,11 +31,13 @@ const Cart: FC = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <div className="w-16 h-12 rounded-[8px] bg-negative shadow-custom cursor-pointer"></div>
+        <div className="w-16 h-12 flex justify-center items-center rounded-[8px] bg-negative shadow-custom cursor-pointer">
+          <img src="/shopping-bag.png" alt="bag" className="w-5 h-5" />
+        </div>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="w-full">
         <SheetHeader>
-          <SheetTitle className="text-white">Cart</SheetTitle>
+          <SheetTitle className="text-white ">Cart</SheetTitle>
           <div>
             <button
               onClick={resetCart}
@@ -51,16 +54,19 @@ const Cart: FC = () => {
           <p className="p3 col-span-3 flex justify-end">Price</p>
         </div>
         <CartItems />
-        <div className="fixed bottom-0">
-          <div className="h-[100px] bg-primary text-white">
-            <div className="pt-5 flex items-center space-x-[190px]">
+        <div className="fixed bottom-0 bg-primary">
+          <div className="h-[150px] bg-primary text-white">
+            <div className="pt-5 text-white flex items-center space-x-[196px]">
               <p className="p3">Total card amount</p>
               <p className="p3">{cartItems.length}</p>
             </div>
-            <div className="pt-5 flex justify-between">
+            <div className="pt-5 text-white flex justify-between">
               <p className="p3">Total price</p>
               <p className="p3">$ {getTotal().toFixed(2)}</p>
             </div>
+            <Button className="bg-negative w-full text-white my-4">
+              Continue to Payment
+            </Button>
           </div>
         </div>
       </SheetContent>
