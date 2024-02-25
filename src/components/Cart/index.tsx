@@ -54,17 +54,17 @@ const Cart: FC = () => {
           <p className="p3 col-span-3 flex justify-end">Price</p>
         </div>
         <CartItems />
-        <div className="fixed bottom-0 bg-primary">
-          <div className="h-[150px] bg-primary text-white">
-            <div className="pt-5 text-white flex items-center space-x-[196px]">
-              <p className="p3">Total card amount</p>
-              <p className="p3">{cartItems.length}</p>
-            </div>
-            <div className="pt-5 text-white flex justify-between">
-              <p className="p3">Total price</p>
-              <p className="p3">$ {getTotal().toFixed(2)}</p>
-            </div>
-            <Button className="bg-negative w-full text-white my-4">
+        <div className=" bg-primary text-white bottom-0 absolute left-0 w-full">
+          <div className="pt-5 text-white flex justify-between mx-5">
+            <p className="p3">Total card amount</p>
+            <p className="p3">{cartItems.length}</p>
+          </div>
+          <div className="pt-5 text-white flex justify-between mx-5">
+            <p className="p3">Total price</p>
+            <p className="p3">$ {getTotal().toFixed(2)}</p>
+          </div>
+          <div className="flex justify-center items-center mx-4 my-4">
+            <Button className="bg-negative w-full text-white">
               Continue to Payment
             </Button>
           </div>
